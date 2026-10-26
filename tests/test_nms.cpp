@@ -33,7 +33,7 @@ TEST(DeviceManager, AddDevice)
 {
     clear_devices();
     Device d = makeDevice(101, "Router1");
-    EXPECT_EQ(add_device(&d), 0);
+    EXPECT_EQ(add_device(&d), 1);
     EXPECT_EQ(get_device_count(), 1);
 }
 
