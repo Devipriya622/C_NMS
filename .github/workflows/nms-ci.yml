@@ -1,5 +1,5 @@
 
-name: NMS Build, GoogleTest and Coverage
+name: NMS Build, GoogleTest, Valgrind and Coverage
 
 on:
   push:
@@ -19,10 +19,13 @@ jobs:
       - name: Install build and coverage tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake lcov
+          sudo apt-get install -y build-essential cmake lcov valgrind
 
       - name: Build and run GoogleTest
         run: make test
+
+      - name: Run Valgrind memory checks
+        run: make valgrind
 
       - name: Generate code coverage report
         run: make coverage
