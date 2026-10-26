@@ -1,5 +1,5 @@
-
-name: NMS Build, GoogleTest, Valgrind and Coverage
+```yaml
+name: NMS Build, Application Output, GoogleTest, Valgrind and Coverage
 
 on:
   push:
@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: [main, master]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test-and-coverage:
@@ -21,6 +24,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential cmake lcov valgrind
 
+      - name: Build NMS application and GoogleTest
+        run: make build
+
+      - name: Run NMS application
+        run: |
+          set -o pipefail
+          printf '2\n8\n11\n0\n' | timeout 15s ./build/nms_app | tee build/nms_application_output.txt
+
       - name: Build and run GoogleTest
         run: make test
 
@@ -30,8 +41,51 @@ jobs:
       - name: Generate code coverage report
         run: make coverage
 
+      - name: Create execution summary
+        if: always()
+        run: |
+          {
+            echo "# Enterprise Telecom Network Management System"
+            echo ""
+            echo "## Execution Details"
+            echo "- Repository: $GITHUB_REPOSITORY"
+            echo "- Branch: $GITHUB_REF_NAME"
+            echo "- Commit: $GITHUB_SHA"
+            echo "- Workflow run: $GITHUB_RUN_NUMBER"
+            echo ""
+            echo "## Results"
+            echo "Check the individual workflow steps above for actual build, application, test, Valgrind, and coverage results."
+            echo ""
+            echo "## Application Output"
+            if [ -f build/nms_application_output.txt ]; then
+              echo '```text'
+              cat build/nms_application_output.txt
+              echo '```'
+            else
+              echo "Application output was not generated."
+            fi
+            echo ""
+            echo "## Coverage"
+            if [ -f build/coverage_filtered.info ]; then
+              echo "Coverage data was generated. Download the HTML report artifact for detailed results."
+            else
+              echo "Coverage report was not generated."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload NMS application output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nms-application-output
+          path: build/nms_application_output.txt
+          if-no-files-found: warn
+
       - name: Upload HTML coverage report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: nms-coverage-report
           path: build/coverage_html/
+          if-no-files-found: warn
+```
