@@ -30,7 +30,12 @@ add_library(nms_core
 )
 
 target_include_directories(nms_core PUBLIC include)
+add_executable(nms_app
+    src/main.c
+    src/menu.c
+)
 
+target_link_libraries(nms_app PRIVATE nms_core)
 add_executable(nms_gtest
     tests/test_nms.cpp
 )
