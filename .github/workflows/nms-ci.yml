@@ -87,4 +87,3 @@ jobs:
           name: nms-coverage-report
           path: build/coverage_html/
           if-no-files-found: warn
-```
