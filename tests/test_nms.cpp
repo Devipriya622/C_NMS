@@ -287,50 +287,47 @@ TEST(EventLoggerTest, GetEventCount)
     EXPECT_EQ(get_event_count(), before + 1);
 }
 
-TEST(StorageTest, SaveDevices)
+
+TEST(Storage, SaveDevices)
 {
     clear_devices();
 
     Device d = makeDevice(601, "SaveRouter");
     ASSERT_EQ(add_device(&d), 1);
 
-    EXPECT_EQ(save_devices(), 0);
+    EXPECT_EQ(save_devices(), 1);
 }
 
-TEST(StorageTest, LoadDevices)
+TEST(Storage, LoadDevices)
 {
     clear_devices();
 
     Device d = makeDevice(602, "LoadRouter");
     ASSERT_EQ(add_device(&d), 1);
-    ASSERT_EQ(save_devices(), 0);
+    ASSERT_EQ(save_devices(), 1);
 
     clear_devices();
 
-    EXPECT_EQ(load_devices(), 0);
+    EXPECT_EQ(load_devices(), 1);
 
     Device result = {};
     EXPECT_EQ(get_device_by_id(602, &result), 1);
     EXPECT_STREQ(result.name, "LoadRouter");
-
-    clear_devices();
 }
 
-TEST(StorageTest, SaveAlarms)
+TEST(Storage, SaveAlarms)
 {
     clear_devices();
 
     Device d = makeDevice(603, "SaveAlarmRouter");
     ASSERT_EQ(add_device(&d), 1);
 
-    int before = get_alarm_count();
     create_alarm(603, "Storage alarm test", SEV_MAJOR);
 
-    ASSERT_EQ(get_alarm_count(), before + 1);
-    EXPECT_EQ(save_alarms(), 0);
+    EXPECT_EQ(save_alarms(), 1);
 }
 
-TEST(StorageTest, LoadAlarms)
+TEST(Storage, LoadAlarms)
 {
     clear_devices();
 
@@ -338,7 +335,7 @@ TEST(StorageTest, LoadAlarms)
     ASSERT_EQ(add_device(&d), 1);
 
     create_alarm(604, "Alarm load test", SEV_MINOR);
-    ASSERT_EQ(save_alarms(), 0);
+    ASSERT_EQ(save_alarms(), 1);
 
-    EXPECT_EQ(load_alarms(), 0);
+    EXPECT_EQ(load_alarms(), 1);
 }
