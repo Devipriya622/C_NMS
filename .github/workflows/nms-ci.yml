@@ -1,4 +1,3 @@
-```yaml
 name: NMS Build, Application Output, GoogleTest, Valgrind and Coverage
 
 on:
