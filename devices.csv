@@ -1,0 +1,2 @@
+id,name,ip,type,location,status,cpu,memory,bandwidth,packetLoss,responseTime
+501,StorageRouter,192.168.1.5,Router,Lab,0,35.00,50.00,200.00,0.00,8.00

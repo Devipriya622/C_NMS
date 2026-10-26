@@ -1,0 +1,23 @@
+
+# Build output
+build/
+
+# Compiled executables
+*.exe
+*.o
+*.obj
+*.gcda
+*.gcno
+*.gcov
+
+# Coverage reports
+coverage.info
+coverage_filtered.info
+coverage_html/
+
+# IDE and editor settings
+.vscode/
+
+# Operating system files
+Thumbs.db
+.DS_Store
