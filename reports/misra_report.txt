@@ -1,0 +1,31 @@
+﻿python : Traceback (most recent call last):
+At line:1 char:1
++ python C:\mingw64\share\Cppcheck\addons\misra.py --quiet "FULL_PATH_T ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], Re 
+   moteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\mingw64\share\Cppcheck\addons\misra.py", line 5167, in <module>
+    main()
+  File "C:\mingw64\share\Cppcheck\addons\misra.py", line 5109, in main
+    checker.parseDump(item,checker.path_premium_addon)
+  File "C:\mingw64\share\Cppcheck\addons\misra.py", line 4675, in parseDump
+    data = cppcheckdata.parsedump(dumpfile)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\mingw64\share\Cppcheck\addons\cppcheckdata.py", line 1451, in parsedump
+    return CppcheckData(filename)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\mingw64\share\Cppcheck\addons\cppcheckdata.py", line 1240, in __init__
+    for event, node in ElementTree.iterparse(self.filename, events=('start', 'end')):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Devi 
+Priya\AppData\Local\Programs\Python\Python311\Lib\xml\etree\ElementTree.py", line 1268, in 
+iterparse
+    next(it)
+  File "C:\Users\Devi 
+Priya\AppData\Local\Programs\Python\Python311\Lib\xml\etree\ElementTree.py", line 1245, in 
+iterator
+    source = open(source, "rb")
+             ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'FULL_PATH_TO_DUMP_FILE'

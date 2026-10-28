@@ -1,0 +1,70 @@
+﻿Checking src\alarm_manager.c ...
+cppcheck : src\alarm_manager.c:94:20: style: Variable 'time_info' can be declared as pointer to const 
+[constVariablePointer]
+At line:1 char:1
++ cppcheck --enable=all --inconclusive --std=c11 -I include src include ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (src\alarm_manag...ariablePointer]:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+        struct tm *time_info = localtime(&alarms[i].timestamp);
+                   ^
+1/8 files checked 16% done
+Checking src\device_manager.c ...
+2/8 files checked 29% done
+Checking src\event_logger.c ...
+src\event_logger.c:43:20: style: Variable 'time_info' can be declared as pointer to const 
+[constVariablePointer]
+        struct tm *time_info = localtime(&events[i].timestamp);
+                   ^
+3/8 files checked 34% done
+Checking src\fault_detection.c ...
+4/8 files checked 41% done
+Checking src\main.c ...
+5/8 files checked 43% done
+Checking src\menu.c ...
+src\menu.c:17:9: style: The scope of the variable 'ch' can be reduced. [variableScope]
+    int ch;
+        ^
+6/8 files checked 73% done
+Checking src\monitoring.c ...
+7/8 files checked 78% done
+Checking src\storage.c ...
+src\storage.c:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all 
+branches. [normalCheckLevelMaxBranches]
+
+^
+8/8 files checked 100% done
+src\alarm_manager.c:11:5: style: The function 'create_alarm' is never used. [unusedFunction]
+int create_alarm(int device_id, const char *message, Severity severity)
+    ^
+src\alarm_manager.c:168:5: style: The function 'clear_alarms' is never used. [unusedFunction]
+int clear_alarms(void)
+    ^
+src\device_manager.c:150:5: style: The function 'clear_devices' is never used. [unusedFunction]
+int clear_devices(void)
+    ^
+src\event_logger.c:56:5: style: The function 'get_event_count' is never used. [unusedFunction]
+int get_event_count(void)
+    ^
+src\monitoring.c:34:6: style: The function 'monitor_all_devices' is never used. [unusedFunction]
+void monitor_all_devices(void)
+     ^
+src\monitoring.c:49:6: style: The function 'display_device_metrics' is never used. [unusedFunction]
+void display_device_metrics(int device_id)
+     ^
+src\device_manager.c:9:5: style: The function 'find_device_index' should have static linkage since it is not 
+used outside of its translation unit. [staticFunction]
+int find_device_index(int id)
+    ^
+src\fault_detection.c:6:5: style: The function 'detect_device_faults' should have static linkage since it is 
+not used outside of its translation unit. [staticFunction]
+int detect_device_faults(int device_id)
+    ^
+src\menu.c:211:6: style: The function 'display_menu' should have static linkage since it is not used outside 
+of its translation unit. [staticFunction]
+void display_menu(void)
+     ^
+nofile:0:0: information: Active checkers: 117/966 (use --checkers-report=<filename> to see details) 
+[checkersReport]
+
