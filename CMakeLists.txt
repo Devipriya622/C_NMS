@@ -7,7 +7,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
+find_package(Threads REQUIRED)
 option(ENABLE_COVERAGE "Enable GCC code coverage" ON)
 
 include(FetchContent)
@@ -34,7 +34,7 @@ add_executable(nms_app
     src/main.c
     src/menu.c
 )
-
+target_link_libraries(nms_core PUBLIC Threads::Threads)
 target_link_libraries(nms_app PRIVATE nms_core)
 add_executable(nms_gtest
     tests/test_nms.cpp

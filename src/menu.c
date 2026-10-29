@@ -226,6 +226,7 @@ void display_menu(void)
     printf("11. View Event Log\n");
     printf("12. Save Data\n");
     printf("13. Load Data\n");
+    printf("14. Monitor All Devices (Multithreaded)\n");
     printf("0. Exit\n");
     printf("========================================\n");
 }
@@ -312,7 +313,9 @@ void run_menu(void)
                     log_event("Data loading attempted");
                 }
                 break;
-
+        case 14:
+    monitor_all_devices();
+    break;
             case 0:
                 printf("Exiting NMS. Goodbye!\n");
                 return;
